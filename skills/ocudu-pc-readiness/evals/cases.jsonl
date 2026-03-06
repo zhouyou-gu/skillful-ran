@@ -1,0 +1,8 @@
+{"name":"explicit readiness gate","prompt":"Check whether this gaming PC is ready for the Skillful RAN OCUDU campaign before we build anything.","should_trigger":true,"must_include":["blockers","stage_dir"]}
+{"name":"docker reachability","prompt":"Run the OCUDU PC readiness check and tell me if Docker and Compose are usable.","should_trigger":true,"must_include":["checks","summary"]}
+{"name":"storage headroom","prompt":"Audit disk and RAM headroom before the OCUDU container build stages.","should_trigger":true,"must_include":["workspace","checks"]}
+{"name":"strict readiness","prompt":"Use strict readiness mode so any blocker fails the OCUDU PC checkpoint.","should_trigger":true,"must_include":["strict"]}
+{"name":"negative build env","prompt":"Build the pinned Docker images for the srsRAN Project and srsUE stages.","should_trigger":false}
+{"name":"negative project build","prompt":"Clone srsRAN Project release_25_10 and build it in .local/ocudu.","should_trigger":false}
+{"name":"negative local runtime","prompt":"Run the split CU DU local lane for 60 seconds.","should_trigger":false}
+{"name":"negative packaging","prompt":"Promote these candidate notes into a tracked skill.","should_trigger":false}

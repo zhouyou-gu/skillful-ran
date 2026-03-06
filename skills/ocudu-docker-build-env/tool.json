@@ -1,0 +1,74 @@
+{
+  "name": "ocudu_docker_build_env",
+  "title": "OCUDU Docker Build Env",
+  "description": "Build or plan the pinned repo-owned Docker images used by the Skillful RAN campaign.",
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "default": ".local/ocudu"
+      },
+      "image_set": {
+        "type": "string",
+        "enum": ["project", "ue", "all"],
+        "default": "all"
+      },
+      "project_image": {
+        "type": "string",
+        "default": "skillful-ran/srsran-project-build:release_25_10"
+      },
+      "ue_image": {
+        "type": "string",
+        "default": "skillful-ran/srsran-4g-ue-build:release_23_11"
+      },
+      "dry_run": {
+        "type": "boolean",
+        "default": true
+      }
+    },
+    "required": ["workspace"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "passed": { "type": "boolean" },
+      "summary": { "type": "string" },
+      "warnings": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "artifacts": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "next_steps": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "stage_dir": {
+        "type": "string"
+      },
+      "images": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "commands": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "required": [
+      "passed",
+      "summary",
+      "warnings",
+      "artifacts",
+      "next_steps",
+      "stage_dir",
+      "images",
+      "commands"
+    ]
+  }
+}

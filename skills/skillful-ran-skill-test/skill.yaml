@@ -1,0 +1,18 @@
+id: skillful-ran-skill-test
+name: Skillful RAN Skill Test
+description: Run the compact QA gate for a new or updated Skillful RAN skill before promotion
+category: testing
+tags:
+  - skillful-ran
+  - qa
+  - evals
+  - validation
+  - packaging
+  - skills
+difficulty: beginner
+repo: https://github.com/zhouyou-gu/skillful-ran
+install:
+  pip: pyyaml
+agent:
+  protocol: mcp
+  tool_schema: tool.json

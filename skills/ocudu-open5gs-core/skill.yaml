@@ -1,0 +1,18 @@
+id: ocudu-open5gs-core
+name: OCUDU Open5GS Core
+description: Control the vendored Open5GS Docker compose stack used by the Skillful RAN proof-of-concept lane
+category: automation
+tags:
+  - ocudu
+  - open5gs
+  - docker
+  - core
+  - compose
+  - 5gc
+difficulty: intermediate
+repo: https://github.com/zhouyou-gu/skillful-ran
+install:
+  pip: pyyaml
+agent:
+  protocol: mcp
+  tool_schema: tool.json

@@ -1,0 +1,8 @@
+{"name":"explicit local lane","prompt":"Run the local split CU DU OCUDU lane for 60 seconds with no-core and test-mode.","should_trigger":true,"must_include":["duration_seconds","commands"]}
+{"name":"software only split lane","prompt":"Start srscucp, srscuup, and srsdu on one host without the core as a local OCUDU checkpoint.","should_trigger":true,"must_include":["config_paths","stage_dir"]}
+{"name":"local runtime dry run","prompt":"Show me the local runtime container command before executing the split-lane test.","should_trigger":true,"must_include":["dry_run","commands"]}
+{"name":"reuse installed tree","prompt":"Use the existing .local/ocudu install tree to run the software-only local runtime stage.","should_trigger":true,"must_include":["install_dir"]}
+{"name":"negative project build","prompt":"Clone and build srsRAN Project release_25_10 first.","should_trigger":false}
+{"name":"negative open5gs core","prompt":"Start the pinned Open5GS core stack and check health.","should_trigger":false}
+{"name":"negative zmq e2e","prompt":"Run the full gNB plus Open5GS plus srsUE ZMQ proof-of-concept path.","should_trigger":false}
+{"name":"negative skill qa","prompt":"Run the QA gate against a new or updated tracked skill.","should_trigger":false}

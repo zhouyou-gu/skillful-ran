@@ -1,0 +1,19 @@
+id: ocudu-local-runtime-test
+name: OCUDU Local Runtime Test
+description: Run the local split CU DU lane with no-core and test-mode overlays on one host
+category: testing
+tags:
+  - ocudu
+  - srsran
+  - open-ran
+  - testing
+  - local-runtime
+  - no-core
+  - testmode
+difficulty: intermediate
+repo: https://github.com/zhouyou-gu/skillful-ran
+install:
+  pip: pyyaml
+agent:
+  protocol: mcp
+  tool_schema: tool.json

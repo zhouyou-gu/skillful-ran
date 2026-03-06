@@ -1,8 +1,8 @@
 {"name":"review reusable script","prompt":"Review these candidate OCUDU helper scripts under .local/ocudu/promote and classify them as keep rewrite or drop.","should_trigger":true,"must_include":["decisions","draft_path"]}
-{"name":"promote new ocudu skill","prompt":"Turn these reusable notes and scripts into a new ocudu-* skill and scaffold the tracked files.","should_trigger":true,"must_include":["mode","generated_files"]}
+{"name":"promote new skill with qa","prompt":"Promote these cleaned candidate files into a new tracked skill after a passing skill QA report.","should_trigger":true,"must_include":["qa_report_path","generated_files"]}
 {"name":"update existing skill","prompt":"Update an existing Skillful RAN skill from cleaned candidate files and keep a backup first.","should_trigger":true,"must_include":["backup_path","promoted_path"]}
 {"name":"dry run promotion","prompt":"Prepare the skill draft under .local/ocudu/promote but do not write tracked files yet.","should_trigger":true,"must_include":["dry_run","draft_path"]}
-{"name":"not build install","prompt":"Clone srsRAN Project and compile it inside the local OCUDU workspace.","should_trigger":false,"notes":"Route to ocudu-build-install."}
-{"name":"not host audit","prompt":"Check whether this Linux workstation is missing SCTP or FFTW development packages.","should_trigger":false,"notes":"Route to ocudu-host-audit."}
-{"name":"not smoke test","prompt":"Run local gnb smoke checks against the build tree.","should_trigger":false,"notes":"Route to ocudu-smoke-test."}
-{"name":"not broad docs","prompt":"Write a long free-form manual about Open RAN history without candidate files to review.","should_trigger":false,"notes":"Out of scope for the packaging skill."}
+{"name":"negative skill qa","prompt":"Run the QA gate for a tracked skill before packaging.","should_trigger":false}
+{"name":"negative project build","prompt":"Clone srsRAN Project and compile it inside the local OCUDU workspace.","should_trigger":false}
+{"name":"negative pc readiness","prompt":"Check whether Docker works and whether this PC is ready for the campaign.","should_trigger":false}
+{"name":"negative runtime","prompt":"Run the ZMQ plus Open5GS proof-of-concept lane.","should_trigger":false}

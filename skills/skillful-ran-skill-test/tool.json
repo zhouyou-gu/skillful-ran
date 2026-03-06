@@ -1,0 +1,59 @@
+{
+  "name": "skillful_ran_skill_test",
+  "title": "Skillful RAN Skill Test",
+  "description": "Run the compact QA gate for a new or updated Skillful RAN skill before promotion.",
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "default": ".local/ocudu"
+      },
+      "target_skill_id": {
+        "type": "string"
+      },
+      "dry_run": {
+        "type": "boolean",
+        "default": true
+      }
+    },
+    "required": ["workspace", "target_skill_id"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "passed": { "type": "boolean" },
+      "summary": { "type": "string" },
+      "warnings": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "artifacts": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "next_steps": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "qa_report_path": {
+        "type": "string"
+      },
+      "checks": {
+        "type": "array",
+        "items": { "type": "object" }
+      }
+    },
+    "required": [
+      "passed",
+      "summary",
+      "warnings",
+      "artifacts",
+      "next_steps",
+      "qa_report_path",
+      "checks"
+    ]
+  }
+}

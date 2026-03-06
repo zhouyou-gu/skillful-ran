@@ -1,0 +1,84 @@
+{
+  "name": "ocudu_project_build",
+  "title": "OCUDU Project Build",
+  "description": "Clone and build srsRAN Project release_25_10 inside .local/ocudu using the repo-owned Docker build image.",
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "default": ".local/ocudu"
+      },
+      "repo_url": {
+        "type": "string",
+        "default": "https://github.com/srsran/srsRAN_Project.git"
+      },
+      "source_ref": {
+        "type": "string",
+        "default": "release_25_10"
+      },
+      "image": {
+        "type": "string",
+        "default": "skillful-ran/srsran-project-build:release_25_10"
+      },
+      "clean_build": {
+        "type": "boolean",
+        "default": false
+      },
+      "dry_run": {
+        "type": "boolean",
+        "default": true
+      }
+    },
+    "required": ["workspace"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "passed": { "type": "boolean" },
+      "summary": { "type": "string" },
+      "warnings": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "artifacts": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "next_steps": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "stage_dir": {
+        "type": "string"
+      },
+      "source_dir": {
+        "type": "string"
+      },
+      "build_dir": {
+        "type": "string"
+      },
+      "install_dir": {
+        "type": "string"
+      },
+      "commands": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "required": [
+      "passed",
+      "summary",
+      "warnings",
+      "artifacts",
+      "next_steps",
+      "stage_dir",
+      "source_dir",
+      "build_dir",
+      "install_dir",
+      "commands"
+    ]
+  }
+}

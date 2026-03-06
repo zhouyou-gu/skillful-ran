@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "summary": "ZMQ proof-of-concept lane is ready.",
+  "warnings": [],
+  "artifacts": [
+    ".local/ocudu/stages/ocudu-zmq-open5gs-e2e/<timestamp>"
+  ],
+  "next_steps": [
+    "Promote stable commands and notes only after reviewing the stage logs."
+  ],
+  "checks": [
+    "RRC Connected",
+    "PDU Session Establishment successful. IP: 10.45.1.2",
+    "ping 10.45.1.1 passed"
+  ]
+}

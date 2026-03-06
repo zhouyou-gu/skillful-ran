@@ -249,6 +249,7 @@ def validate_tool_conventions(
         candidate_paths = input_props.get("candidate_paths")
         target_skill_id = input_props.get("target_skill_id")
         dry_run = input_props.get("dry_run")
+        qa_report_path = input_props.get("qa_report_path")
 
         if not isinstance(mode, dict) or mode.get("enum") != ["review", "promote", "update"]:
             errors.append(f"{tool_rel}:inputSchema.properties.mode: expected enum review|promote|update")
@@ -258,10 +259,18 @@ def validate_tool_conventions(
             errors.append(f"{tool_rel}:inputSchema.properties.target_skill_id: expected string")
         if not isinstance(dry_run, dict) or dry_run.get("type") != "boolean":
             errors.append(f"{tool_rel}:inputSchema.properties.dry_run: expected boolean")
+        if not isinstance(qa_report_path, dict) or qa_report_path.get("type") != "string":
+            errors.append(f"{tool_rel}:inputSchema.properties.qa_report_path: expected string")
 
         for field in ["decisions", "draft_path", "generated_files"]:
             if field not in properties:
                 errors.append(f"{tool_rel}:outputSchema.properties: missing packaging field '{field}'")
+
+    if skill_id == "skillful-ran-skill-test":
+        if "qa_report_path" not in properties:
+            errors.append(f"{tool_rel}:outputSchema.properties: missing skill-test field 'qa_report_path'")
+        if "checks" not in properties:
+            errors.append(f"{tool_rel}:outputSchema.properties: missing skill-test field 'checks'")
 
 
 def collect_schema_errors(

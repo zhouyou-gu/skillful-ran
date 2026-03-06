@@ -1,0 +1,8 @@
+{"name":"build both images","prompt":"Build the repo-owned Docker images for the srsRAN Project and srsUE stages.","should_trigger":true,"must_include":["image_set","commands"]}
+{"name":"project image only","prompt":"Only build the Docker image used for the srsRAN Project release_25_10 stage.","should_trigger":true,"must_include":["project_image"]}
+{"name":"ue image only","prompt":"Prepare the Docker image used for the srsUE build lane.","should_trigger":true,"must_include":["ue_image"]}
+{"name":"dry run image plan","prompt":"Show me the Docker build commands before building the Skillful RAN images.","should_trigger":true,"must_include":["dry_run","commands"]}
+{"name":"negative pc readiness","prompt":"Check whether Docker works and whether this PC has enough disk and memory.","should_trigger":false}
+{"name":"negative project build","prompt":"Clone and build srsRAN Project release_25_10 in .local/ocudu.","should_trigger":false}
+{"name":"negative open5gs core","prompt":"Bring up the Open5GS core compose stack and check its health.","should_trigger":false}
+{"name":"negative skill qa","prompt":"Run the QA skill against a new tracked skill before promotion.","should_trigger":false}

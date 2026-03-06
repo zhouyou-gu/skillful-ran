@@ -1,0 +1,70 @@
+{
+  "name": "ocudu_open5gs_core",
+  "title": "OCUDU Open5GS Core",
+  "description": "Manage the vendored Open5GS Docker compose stack used by the Skillful RAN proof-of-concept lane.",
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "default": ".local/ocudu"
+      },
+      "action": {
+        "type": "string",
+        "enum": ["up", "down", "status"],
+        "default": "status"
+      },
+      "compose_file": {
+        "type": "string",
+        "default": "assets/compose/docker-compose.open5gs.yml"
+      },
+      "dry_run": {
+        "type": "boolean",
+        "default": true
+      }
+    },
+    "required": ["workspace"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "passed": { "type": "boolean" },
+      "summary": { "type": "string" },
+      "warnings": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "artifacts": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "next_steps": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "stage_dir": {
+        "type": "string"
+      },
+      "services": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "commands": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "required": [
+      "passed",
+      "summary",
+      "warnings",
+      "artifacts",
+      "next_steps",
+      "stage_dir",
+      "services",
+      "commands"
+    ]
+  }
+}

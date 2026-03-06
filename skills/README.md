@@ -106,6 +106,7 @@ Promote only:
 - compact skill drafts
 
 Use `skillful-ran-packaging` to review and promote material from `.local/ocudu/`.
+Run `skillful-ran-skill-test` before any non-dry-run promotion or update.
 
 ## Validation
 

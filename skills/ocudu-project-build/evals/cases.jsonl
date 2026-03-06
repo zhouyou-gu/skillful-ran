@@ -1,0 +1,8 @@
+{"name":"explicit release build","prompt":"Build srsRAN Project release_25_10 in .local/ocudu using the Skillful RAN container path.","should_trigger":true,"must_include":["source_ref","commands"]}
+{"name":"project clone and build","prompt":"Clone the official srsRAN Project repo and compile the OCUDU-aligned RAN stack for this workspace.","should_trigger":true,"must_include":["workspace","install_dir"]}
+{"name":"clean rebuild","prompt":"Run a clean Docker-based rebuild of the pinned srsRAN Project source tree.","should_trigger":true,"must_include":["clean_build"]}
+{"name":"dry run build plan","prompt":"Plan the srsRAN Project build commands before changing anything.","should_trigger":true,"must_include":["dry_run","commands"]}
+{"name":"negative readiness","prompt":"Check whether Docker is usable and whether this PC has enough disk and RAM.","should_trigger":false}
+{"name":"negative srsue build","prompt":"Build srsUE from the srsRAN 4G repo for the ZMQ lane.","should_trigger":false}
+{"name":"negative open5gs core","prompt":"Bring up the pinned Open5GS core containers and check their health.","should_trigger":false}
+{"name":"negative packaging","prompt":"Review scratch files and promote them into a tracked skill.","should_trigger":false}

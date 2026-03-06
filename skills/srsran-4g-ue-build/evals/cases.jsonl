@@ -1,0 +1,8 @@
+{"name":"explicit srsue build","prompt":"Build srsUE from srsRAN 4G release_23_11 in .local/ocudu for the ZMQ lane.","should_trigger":true,"must_include":["source_ref","install_dir"]}
+{"name":"prototype ue prep","prompt":"Prepare the prototype 5G UE side from the srsRAN 4G repo for the Open5GS proof of concept.","should_trigger":true,"must_include":["commands","workspace"]}
+{"name":"clean ue rebuild","prompt":"Do a clean Docker-based rebuild of srsUE from the pinned release.","should_trigger":true,"must_include":["clean_build"]}
+{"name":"dry run ue plan","prompt":"Show the commands for the srsUE build before executing them.","should_trigger":true,"must_include":["dry_run","commands"]}
+{"name":"negative project build","prompt":"Build the srsRAN Project CU and DU side first.","should_trigger":false}
+{"name":"negative open5gs core","prompt":"Bring up the pinned Open5GS core compose stack.","should_trigger":false}
+{"name":"negative local runtime","prompt":"Run the split CU DU local lane for 60 seconds.","should_trigger":false}
+{"name":"negative packaging","prompt":"Promote this scratch material into a tracked skill.","should_trigger":false}

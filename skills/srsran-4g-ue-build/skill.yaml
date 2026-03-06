@@ -1,0 +1,19 @@
+id: srsran-4g-ue-build
+name: srsRAN 4G UE Build
+description: Clone and build srsUE from srsRAN 4G release_23_11 for the ZMQ proof-of-concept lane
+category: telco
+tags:
+  - srsran
+  - srsue
+  - 4g
+  - 5g-ue
+  - build
+  - zeromq
+  - release-23-11
+difficulty: intermediate
+repo: https://github.com/zhouyou-gu/skillful-ran
+install:
+  pip: pyyaml
+agent:
+  protocol: mcp
+  tool_schema: tool.json

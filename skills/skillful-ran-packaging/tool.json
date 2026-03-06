@@ -26,6 +26,9 @@
         "type": "boolean",
         "default": true
       },
+      "qa_report_path": {
+        "type": "string"
+      },
       "title": {
         "type": "string"
       },

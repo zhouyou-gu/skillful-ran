@@ -1,0 +1,74 @@
+{
+  "name": "ocudu_local_runtime_test",
+  "title": "OCUDU Local Runtime Test",
+  "description": "Run the software-only local lane: split CU DU on one host with no-core and test-mode overlays.",
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "default": ".local/ocudu"
+      },
+      "install_dir": {
+        "type": "string",
+        "default": ".local/ocudu/install/srsran-project"
+      },
+      "image": {
+        "type": "string",
+        "default": "skillful-ran/srsran-project-build:release_25_10"
+      },
+      "duration_seconds": {
+        "type": "integer",
+        "minimum": 10,
+        "default": 60
+      },
+      "dry_run": {
+        "type": "boolean",
+        "default": true
+      }
+    },
+    "required": ["workspace"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "passed": { "type": "boolean" },
+      "summary": { "type": "string" },
+      "warnings": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "artifacts": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "next_steps": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "stage_dir": {
+        "type": "string"
+      },
+      "config_paths": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "commands": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "required": [
+      "passed",
+      "summary",
+      "warnings",
+      "artifacts",
+      "next_steps",
+      "stage_dir",
+      "config_paths",
+      "commands"
+    ]
+  }
+}

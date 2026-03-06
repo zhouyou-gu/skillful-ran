@@ -1,0 +1,86 @@
+{
+  "name": "ocudu_pc_readiness",
+  "title": "OCUDU PC Readiness",
+  "description": "Collect a non-destructive readiness report for the Skillful RAN OCUDU software-only campaign.",
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "default": ".local/ocudu"
+      },
+      "profile": {
+        "type": "string",
+        "enum": ["ubuntu-24.04-gaming-pc", "portable-linux"],
+        "default": "ubuntu-24.04-gaming-pc"
+      },
+      "check_docker": {
+        "type": "boolean",
+        "default": true
+      },
+      "check_storage": {
+        "type": "boolean",
+        "default": true
+      },
+      "check_usb": {
+        "type": "boolean",
+        "default": true
+      },
+      "dry_run": {
+        "type": "boolean",
+        "default": true
+      },
+      "strict": {
+        "type": "boolean",
+        "default": false
+      }
+    },
+    "required": ["workspace"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "passed": { "type": "boolean" },
+      "summary": { "type": "string" },
+      "warnings": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "artifacts": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "next_steps": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "blockers": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "checks": {
+        "type": "array",
+        "items": { "type": "object" }
+      },
+      "stage_dir": {
+        "type": "string"
+      },
+      "hardware": {
+        "type": "object"
+      }
+    },
+    "required": [
+      "passed",
+      "summary",
+      "warnings",
+      "artifacts",
+      "next_steps",
+      "blockers",
+      "checks",
+      "stage_dir",
+      "hardware"
+    ]
+  }
+}

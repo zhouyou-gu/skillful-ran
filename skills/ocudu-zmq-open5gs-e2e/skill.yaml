@@ -1,0 +1,19 @@
+id: ocudu-zmq-open5gs-e2e
+name: OCUDU ZMQ Open5GS E2E
+description: Run the proof-of-concept lane with gNB, Open5GS, srsUE, and ZeroMQ on one PC
+category: testing
+tags:
+  - ocudu
+  - srsran
+  - open5gs
+  - srsue
+  - zeromq
+  - e2e
+  - poc
+difficulty: advanced
+repo: https://github.com/zhouyou-gu/skillful-ran
+install:
+  pip: pyyaml
+agent:
+  protocol: mcp
+  tool_schema: tool.json

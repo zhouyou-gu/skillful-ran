@@ -1,0 +1,8 @@
+{"name":"explicit e2e lane","prompt":"Run the software-only gNB plus Open5GS plus srsUE ZeroMQ proof-of-concept lane on this PC.","should_trigger":true,"must_include":["config_paths","commands"]}
+{"name":"attach and ping poc","prompt":"Use the pinned Open5GS core and the ZMQ configs to try the attach plus ping proof of concept.","should_trigger":true,"must_include":["duration_seconds","stage_dir"]}
+{"name":"dry run e2e","prompt":"Show me the container commands for the ZMQ Open5GS proof-of-concept lane before running them.","should_trigger":true,"must_include":["dry_run","commands"]}
+{"name":"reuse installed trees","prompt":"Use the existing install trees to run the gNB and srsUE ZeroMQ lane.","should_trigger":true,"must_include":["project_install_dir","ue_install_dir"]}
+{"name":"negative local lane","prompt":"Run the no-core split CU DU local runtime stage.","should_trigger":false}
+{"name":"negative open5gs core","prompt":"Bring up or check the vendored Open5GS core compose stack.","should_trigger":false}
+{"name":"negative project build","prompt":"Build srsRAN Project release_25_10 first.","should_trigger":false}
+{"name":"negative skill qa","prompt":"Run the QA gate against a tracked skill before promotion.","should_trigger":false}

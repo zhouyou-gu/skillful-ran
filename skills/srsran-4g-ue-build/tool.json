@@ -1,0 +1,84 @@
+{
+  "name": "srsran_4g_ue_build",
+  "title": "srsRAN 4G UE Build",
+  "description": "Clone and build srsUE from srsRAN 4G release_23_11 for the software-only ZMQ lane.",
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "default": ".local/ocudu"
+      },
+      "repo_url": {
+        "type": "string",
+        "default": "https://github.com/srsran/srsRAN_4G.git"
+      },
+      "source_ref": {
+        "type": "string",
+        "default": "release_23_11"
+      },
+      "image": {
+        "type": "string",
+        "default": "skillful-ran/srsran-4g-ue-build:release_23_11"
+      },
+      "clean_build": {
+        "type": "boolean",
+        "default": false
+      },
+      "dry_run": {
+        "type": "boolean",
+        "default": true
+      }
+    },
+    "required": ["workspace"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "passed": { "type": "boolean" },
+      "summary": { "type": "string" },
+      "warnings": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "artifacts": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "next_steps": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "stage_dir": {
+        "type": "string"
+      },
+      "source_dir": {
+        "type": "string"
+      },
+      "build_dir": {
+        "type": "string"
+      },
+      "install_dir": {
+        "type": "string"
+      },
+      "commands": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "required": [
+      "passed",
+      "summary",
+      "warnings",
+      "artifacts",
+      "next_steps",
+      "stage_dir",
+      "source_dir",
+      "build_dir",
+      "install_dir",
+      "commands"
+    ]
+  }
+}

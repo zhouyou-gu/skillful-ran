@@ -1,0 +1,8 @@
+{"name":"bring up core","prompt":"Bring up the vendored Open5GS compose stack for the Skillful RAN proof-of-concept lane.","should_trigger":true,"must_include":["action","commands"]}
+{"name":"core status","prompt":"Check the status of the pinned Open5GS core stack before starting the ZMQ lane.","should_trigger":true,"must_include":["services","summary"]}
+{"name":"core down","prompt":"Tear down the repo-owned Open5GS core containers and remove orphans.","should_trigger":true,"must_include":["action"]}
+{"name":"dry run compose","prompt":"Show me the docker compose commands for the vendored Open5GS core without executing them.","should_trigger":true,"must_include":["dry_run","commands"]}
+{"name":"negative local lane","prompt":"Run the local split CU DU no-core test-mode lane.","should_trigger":false}
+{"name":"negative srsue build","prompt":"Build srsUE from srsRAN 4G release_23_11.","should_trigger":false}
+{"name":"negative zmq e2e","prompt":"Run the full gNB plus Open5GS plus srsUE ZMQ proof-of-concept path.","should_trigger":false}
+{"name":"negative packaging","prompt":"Promote reusable notes into a tracked skill.","should_trigger":false}

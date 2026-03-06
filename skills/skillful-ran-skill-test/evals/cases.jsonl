@@ -1,0 +1,8 @@
+{"name":"qa new skill","prompt":"Run the Skillful RAN QA gate against a newly updated tracked skill before promotion.","should_trigger":true,"must_include":["target_skill_id","qa_report_path"]}
+{"name":"validator plus hooks","prompt":"Check the target skill for schema health, eval coverage, and safe helper hooks.","should_trigger":true,"must_include":["checks","summary"]}
+{"name":"packaging prerequisite","prompt":"Generate the QA report that packaging should consume as a promotion gate.","should_trigger":true,"must_include":["qa_report_path"]}
+{"name":"dry run qa","prompt":"Run the compact safe QA checks for a tracked skill without doing any heavy workflow execution.","should_trigger":true,"must_include":["dry_run","checks"]}
+{"name":"negative packaging","prompt":"Review candidate files under .local/ocudu and promote them into a tracked skill.","should_trigger":false}
+{"name":"negative project build","prompt":"Build srsRAN Project release_25_10 in the workspace.","should_trigger":false}
+{"name":"negative open5gs core","prompt":"Bring up the vendored Open5GS core compose stack.","should_trigger":false}
+{"name":"negative zmq e2e","prompt":"Run the software-only gNB plus Open5GS plus srsUE proof-of-concept lane.","should_trigger":false}

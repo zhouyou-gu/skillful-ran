@@ -1,0 +1,19 @@
+id: ocudu-project-build
+name: OCUDU Project Build
+description: Clone and build srsRAN Project release_25_10 inside the Skillful RAN workspace
+category: telco
+tags:
+  - ocudu
+  - srsran
+  - open-ran
+  - linux
+  - build
+  - docker
+  - release-25-10
+difficulty: intermediate
+repo: https://github.com/zhouyou-gu/skillful-ran
+install:
+  pip: pyyaml
+agent:
+  protocol: mcp
+  tool_schema: tool.json

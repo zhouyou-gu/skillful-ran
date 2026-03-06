@@ -303,6 +303,17 @@ def run_validator(root: Path) -> tuple[bool, str]:
     return proc.returncode == 0, message
 
 
+def validate_qa_report(path: Path, target_skill_id: str) -> tuple[bool, str]:
+    if not path.exists():
+        return False, f"qa report is missing: {path}"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if payload.get("target_skill_id") != target_skill_id:
+        return False, "qa report target does not match target_skill_id"
+    if not payload.get("passed", False):
+        return False, "qa report did not pass"
+    return True, ""
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", choices=["review", "promote", "update"], required=True)
@@ -310,6 +321,7 @@ def main() -> int:
     parser.add_argument("--target-skill-id", required=True)
     parser.add_argument("--workspace", default=".local/ocudu")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--qa-report-path")
     parser.add_argument("--title")
     parser.add_argument("--category")
     parser.add_argument("--tag", action="append", dest="tags", default=[])
@@ -338,6 +350,13 @@ def main() -> int:
         }
         print(json.dumps(payload, indent=2))
         return 1
+
+    if args.mode in {"promote", "update"} and not args.dry_run:
+        if not args.qa_report_path:
+            raise SystemExit("qa report path is required for non-dry-run promote and update")
+        qa_ok, qa_message = validate_qa_report(Path(args.qa_report_path), args.target_skill_id)
+        if not qa_ok:
+            raise SystemExit(f"qa gate failed: {qa_message}")
 
     skill_dir = root / "skills" / args.target_skill_id
     is_update = args.mode == "update"

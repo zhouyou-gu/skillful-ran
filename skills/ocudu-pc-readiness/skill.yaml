@@ -1,0 +1,19 @@
+id: ocudu-pc-readiness
+name: OCUDU PC Readiness
+description: Check whether this Linux PC is ready for the Skillful RAN software-only OCUDU campaign
+category: telco
+tags:
+  - ocudu
+  - srsran
+  - open-ran
+  - linux
+  - docker
+  - readiness
+  - gaming-pc
+difficulty: beginner
+repo: https://github.com/zhouyou-gu/skillful-ran
+install:
+  pip: pyyaml
+agent:
+  protocol: mcp
+  tool_schema: tool.json

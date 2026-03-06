@@ -1,0 +1,18 @@
+id: ocudu-docker-build-env
+name: OCUDU Docker Build Env
+description: Build the repo-owned Docker images used for the srsRAN Project and srsUE stages
+category: devtools
+tags:
+  - ocudu
+  - srsran
+  - docker
+  - build
+  - images
+  - zeromq
+difficulty: beginner
+repo: https://github.com/zhouyou-gu/skillful-ran
+install:
+  pip: pyyaml
+agent:
+  protocol: mcp
+  tool_schema: tool.json

@@ -1,0 +1,82 @@
+{
+  "name": "ocudu_zmq_open5gs_e2e",
+  "title": "OCUDU ZMQ Open5GS E2E",
+  "description": "Run the software-only proof-of-concept lane: gNB plus Open5GS plus srsUE over ZeroMQ.",
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "default": ".local/ocudu"
+      },
+      "project_install_dir": {
+        "type": "string",
+        "default": ".local/ocudu/install/srsran-project"
+      },
+      "ue_install_dir": {
+        "type": "string",
+        "default": ".local/ocudu/install/srsran-4g"
+      },
+      "project_image": {
+        "type": "string",
+        "default": "skillful-ran/srsran-project-build:release_25_10"
+      },
+      "ue_image": {
+        "type": "string",
+        "default": "skillful-ran/srsran-4g-ue-build:release_23_11"
+      },
+      "duration_seconds": {
+        "type": "integer",
+        "minimum": 30,
+        "default": 120
+      },
+      "dry_run": {
+        "type": "boolean",
+        "default": true
+      }
+    },
+    "required": ["workspace"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "passed": { "type": "boolean" },
+      "summary": { "type": "string" },
+      "warnings": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "artifacts": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "next_steps": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "stage_dir": {
+        "type": "string"
+      },
+      "config_paths": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "commands": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "required": [
+      "passed",
+      "summary",
+      "warnings",
+      "artifacts",
+      "next_steps",
+      "stage_dir",
+      "config_paths",
+      "commands"
+    ]
+  }
+}
