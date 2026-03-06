@@ -1,14 +1,14 @@
 {
-  "title": "Skill Marketplace Template",
-  "description": "Reusable agent skills",
+  "title": "Skillful RAN",
+  "description": "Practical, junior-friendly skill packs for building, testing, and understanding OCUDU and the open RAN stack.",
   "author": "Zhouyou Gu",
   "license": "MIT",
-  "url": "https://<user>.github.io/<repo>",
-  "theme": "dark",
+  "url": "https://zhouyou-gu.github.io/skillful-ran",
+  "theme": "light",
   "categories": [
-    "data",
-    "automation",
-    "ai",
-    "devtools"
+    "telco",
+    "testing",
+    "devtools",
+    "automation"
   ]
 }

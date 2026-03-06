@@ -1,0 +1,8 @@
+{"name":"local build smoke","prompt":"Run a local smoke test against the OCUDU build tree and tell me if the basic artifacts look sane.","should_trigger":true,"must_include":["mode","checks"]}
+{"name":"installed binary smoke","prompt":"Check the installed gnb binary under /usr/local and confirm it responds locally.","should_trigger":true,"must_include":["install_prefix","summary"]}
+{"name":"zeromq readiness","prompt":"Inspect the build tree and tell me whether ZeroMQ was enabled in the CMake configuration.","should_trigger":true,"must_include":["zeromq-readiness","artifacts"]}
+{"name":"dry run smoke","prompt":"Show me the smoke-test commands before you execute anything in the workspace.","should_trigger":true,"must_include":["dry_run","next_steps"]}
+{"name":"not host audit","prompt":"Tell me whether this Ubuntu host is missing libfftw3-dev and libsctp-dev.","should_trigger":false,"notes":"Route to ocudu-host-audit."}
+{"name":"not build plan","prompt":"Clone the source tree and compile srsRAN Project inside .local/ocudu.","should_trigger":false,"notes":"Route to ocudu-build-install."}
+{"name":"not packaging","prompt":"Promote these reusable notes into a tracked Skillful RAN skill.","should_trigger":false,"notes":"Route to skillful-ran-packaging."}
+{"name":"not rf proof","prompt":"Prove full RU interoperability and carrier-grade conformance from this local smoke test.","should_trigger":false,"notes":"Out of scope for the smoke-test skill."}

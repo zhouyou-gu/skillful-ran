@@ -17,6 +17,24 @@ SCHEMAS_DIR = ROOT / "schemas"
 SKILLS_DIR = ROOT / "skills"
 CONFIG_PATH = ROOT / "config" / "marketplace.json"
 SKILL_FRONTMATTER_RE = re.compile(r"\A---\s*\n(.*?)\n---\s*(?:\n|$)", re.DOTALL)
+REQUIRED_SKILL_HEADINGS = [
+    "## Trigger",
+    "## Inputs",
+    "## Workflow",
+    "## Outputs",
+    "## Failure / Escalation",
+]
+STANDARD_OUTPUT_FIELDS = ["passed", "summary", "warnings", "artifacts", "next_steps"]
+ALLOWED_PREFIXES = ("ocudu-", "srsran-", "skillful-ran-")
+MIN_EVAL_CASES = 8
+MAX_EVAL_CASES = 12
+MAX_SKILL_LINES = 140
+MAX_README_NONEMPTY_LINES = 16
+MAX_REFERENCE_LINES = 170
+
+
+def count_nonempty_lines(text: str) -> int:
+    return sum(1 for line in text.splitlines() if line.strip())
 
 
 def load_json(path: Path) -> Any:
@@ -79,6 +97,172 @@ def validate_codex_skill_file(path: Path, skill_id: str | None, errors: list[str
             f"{path.relative_to(ROOT)}:<frontmatter>.description: required non-empty string"
         )
 
+    if len(text.splitlines()) > MAX_SKILL_LINES:
+        errors.append(
+            f"{path.relative_to(ROOT)}:<body>: exceeds compactness budget of {MAX_SKILL_LINES} lines"
+        )
+
+    body = text[match.end() :]
+    missing_headings = [heading for heading in REQUIRED_SKILL_HEADINGS if heading not in body]
+    if missing_headings:
+        errors.append(
+            f"{path.relative_to(ROOT)}:<body>: missing required section(s): {', '.join(missing_headings)}"
+        )
+
+    if "do not use" not in text.lower():
+        errors.append(
+            f"{path.relative_to(ROOT)}:<body>: must include explicit negative routing with 'Do not use'"
+        )
+
+
+def validate_readme_file(path: Path, errors: list[str]) -> None:
+    if not path.exists():
+        errors.append(f"{path.relative_to(ROOT)}: missing required file")
+        return
+
+    try:
+        text = path.read_text(encoding="utf-8")
+    except Exception as exc:
+        errors.append(f"{path.relative_to(ROOT)}: unable to read file ({exc})")
+        return
+
+    if count_nonempty_lines(text) > MAX_README_NONEMPTY_LINES:
+        errors.append(
+            f"{path.relative_to(ROOT)}:<body>: exceeds compactness budget of {MAX_README_NONEMPTY_LINES} non-empty lines"
+        )
+
+
+def validate_reference_files(skill_dir: Path, errors: list[str]) -> None:
+    references_dir = skill_dir / "references"
+    if not references_dir.exists():
+        return
+
+    for ref_path in sorted(path for path in references_dir.rglob("*") if path.is_file()):
+        try:
+            text = ref_path.read_text(encoding="utf-8")
+        except Exception as exc:
+            errors.append(f"{ref_path.relative_to(ROOT)}: unable to read file ({exc})")
+            continue
+
+        if len(text.splitlines()) > MAX_REFERENCE_LINES:
+            errors.append(
+                f"{ref_path.relative_to(ROOT)}:<body>: exceeds compactness budget of {MAX_REFERENCE_LINES} lines"
+            )
+
+
+def validate_eval_cases(skill_dir: Path, errors: list[str]) -> None:
+    eval_path = skill_dir / "evals" / "cases.jsonl"
+    if not eval_path.exists():
+        errors.append(f"{eval_path.relative_to(ROOT)}: missing required file")
+        return
+
+    try:
+        lines = [line for line in eval_path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    except Exception as exc:
+        errors.append(f"{eval_path.relative_to(ROOT)}: unable to read file ({exc})")
+        return
+
+    if not (MIN_EVAL_CASES <= len(lines) <= MAX_EVAL_CASES):
+        errors.append(
+            f"{eval_path.relative_to(ROOT)}:<body>: expected {MIN_EVAL_CASES}-{MAX_EVAL_CASES} non-empty JSONL cases"
+        )
+
+    positive = 0
+    negative = 0
+    for index, line in enumerate(lines, start=1):
+        label = f"{eval_path.relative_to(ROOT)}:{index}"
+        try:
+            payload = json.loads(line)
+        except json.JSONDecodeError as exc:
+            errors.append(f"{label}: invalid JSON ({exc})")
+            continue
+
+        if not isinstance(payload, dict):
+            errors.append(f"{label}: expected JSON object")
+            continue
+
+        name = payload.get("name")
+        prompt = payload.get("prompt")
+        should_trigger = payload.get("should_trigger")
+        must_include = payload.get("must_include")
+
+        if not isinstance(name, str) or not name.strip():
+            errors.append(f"{label}.name: required non-empty string")
+        if not isinstance(prompt, str) or not prompt.strip():
+            errors.append(f"{label}.prompt: required non-empty string")
+        if not isinstance(should_trigger, bool):
+            errors.append(f"{label}.should_trigger: required boolean")
+        elif should_trigger:
+            positive += 1
+        else:
+            negative += 1
+
+        if must_include is not None:
+            if not isinstance(must_include, list) or not all(
+                isinstance(item, str) and item.strip() for item in must_include
+            ):
+                errors.append(f"{label}.must_include: expected array of non-empty strings")
+
+    if lines and positive == 0:
+        errors.append(f"{eval_path.relative_to(ROOT)}:<body>: must include at least one positive case")
+    if lines and negative == 0:
+        errors.append(f"{eval_path.relative_to(ROOT)}:<body>: must include at least one negative case")
+
+
+def validate_tool_conventions(
+    tool_data: dict[str, Any], tool_rel: Path, skill_id: str | None, errors: list[str]
+) -> None:
+    output_schema = tool_data.get("outputSchema")
+    if not isinstance(output_schema, dict):
+        errors.append(f"{tool_rel}:outputSchema: required object for Skillful RAN skills")
+        return
+
+    properties = output_schema.get("properties")
+    required = output_schema.get("required")
+    if not isinstance(properties, dict):
+        errors.append(f"{tool_rel}:outputSchema.properties: required object")
+        return
+
+    if not isinstance(required, list):
+        errors.append(f"{tool_rel}:outputSchema.required: required array")
+        return
+
+    for field in STANDARD_OUTPUT_FIELDS:
+        if field not in properties:
+            errors.append(f"{tool_rel}:outputSchema.properties: missing standard field '{field}'")
+        if field not in required:
+            errors.append(f"{tool_rel}:outputSchema.required: missing '{field}'")
+
+    input_schema = tool_data.get("inputSchema")
+    if not isinstance(input_schema, dict):
+        return
+
+    input_props = input_schema.get("properties")
+    if not isinstance(input_props, dict):
+        return
+
+    if "workspace" not in input_props:
+        errors.append(f"{tool_rel}:inputSchema.properties: missing standard field 'workspace'")
+
+    if skill_id == "skillful-ran-packaging":
+        mode = input_props.get("mode", {})
+        candidate_paths = input_props.get("candidate_paths")
+        target_skill_id = input_props.get("target_skill_id")
+        dry_run = input_props.get("dry_run")
+
+        if not isinstance(mode, dict) or mode.get("enum") != ["review", "promote", "update"]:
+            errors.append(f"{tool_rel}:inputSchema.properties.mode: expected enum review|promote|update")
+        if not isinstance(candidate_paths, dict) or candidate_paths.get("type") != "array":
+            errors.append(f"{tool_rel}:inputSchema.properties.candidate_paths: expected array")
+        if not isinstance(target_skill_id, dict) or target_skill_id.get("type") != "string":
+            errors.append(f"{tool_rel}:inputSchema.properties.target_skill_id: expected string")
+        if not isinstance(dry_run, dict) or dry_run.get("type") != "boolean":
+            errors.append(f"{tool_rel}:inputSchema.properties.dry_run: expected boolean")
+
+        for field in ["decisions", "draft_path", "generated_files"]:
+            if field not in properties:
+                errors.append(f"{tool_rel}:outputSchema.properties: missing packaging field '{field}'")
+
 
 def collect_schema_errors(
     validator: Draft202012Validator,
@@ -131,8 +315,7 @@ def main() -> int:
         readme_path = skill_dir / "README.md"
         skill_md_path = skill_dir / "SKILL.md"
 
-        if not readme_path.exists():
-            warnings.append(f"{readme_path.relative_to(ROOT)}: missing optional file")
+        validate_readme_file(readme_path, errors)
 
         if not skill_md_path.exists():
             errors.append(f"{skill_md_path.relative_to(ROOT)}: missing required file")
@@ -155,6 +338,10 @@ def main() -> int:
 
         skill_id = skill_data.get("id")
         if isinstance(skill_id, str):
+            if not skill_id.startswith(ALLOWED_PREFIXES):
+                errors.append(
+                    f"{skill_yaml_path.relative_to(ROOT)}:id: '{skill_id}' must start with one of {ALLOWED_PREFIXES}"
+                )
             if skill_id != skill_dir.name:
                 errors.append(
                     f"{skill_yaml_path.relative_to(ROOT)}:id: '{skill_id}' must match folder '{skill_dir.name}'"
@@ -175,6 +362,9 @@ def main() -> int:
                 skill_id if isinstance(skill_id, str) else None,
                 errors,
             )
+
+        validate_reference_files(skill_dir, errors)
+        validate_eval_cases(skill_dir, errors)
 
         category = skill_data.get("category")
         if isinstance(category, str) and allowed_categories and category not in allowed_categories:
@@ -213,6 +403,12 @@ def main() -> int:
             continue
 
         collect_schema_errors(tool_validator, tool_data, str(tool_rel), errors)
+        validate_tool_conventions(
+            tool_data,
+            tool_rel,
+            skill_id if isinstance(skill_id, str) else None,
+            errors,
+        )
 
         tool_name = tool_data.get("name")
         if isinstance(tool_name, str) and isinstance(skill_id, str):

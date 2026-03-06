@@ -1,0 +1,18 @@
+id: ocudu-host-audit
+name: OCUDU Host Audit
+description: Check Linux host readiness for OCUDU and srsRAN build work without mutating the system
+category: telco
+tags:
+  - ocudu
+  - srsran
+  - open-ran
+  - linux
+  - audit
+  - ubuntu
+difficulty: beginner
+repo: https://github.com/zhouyou-gu/skillful-ran
+install:
+  pip: platformdirs
+agent:
+  protocol: mcp
+  tool_schema: tool.json

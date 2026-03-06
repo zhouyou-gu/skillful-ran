@@ -72,3 +72,6 @@ logs/
 *.bak
 *.backup
 .temp/
+
+# Skillful RAN local OCUDU workspace
+.local/

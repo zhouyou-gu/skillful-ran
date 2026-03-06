@@ -1,0 +1,100 @@
+{
+  "name": "skillful_ran_packaging",
+  "title": "Skillful RAN Packaging",
+  "description": "Review scratch artifacts, classify them as keep rewrite drop, and scaffold compact tracked skills for Skillful RAN.",
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "mode": {
+        "type": "string",
+        "enum": ["review", "promote", "update"]
+      },
+      "candidate_paths": {
+        "type": "array",
+        "items": { "type": "string" },
+        "minItems": 1
+      },
+      "target_skill_id": {
+        "type": "string"
+      },
+      "workspace": {
+        "type": "string",
+        "default": ".local/ocudu"
+      },
+      "dry_run": {
+        "type": "boolean",
+        "default": true
+      },
+      "title": {
+        "type": "string"
+      },
+      "category": {
+        "type": "string"
+      },
+      "tags": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "required": ["mode", "candidate_paths", "target_skill_id", "workspace"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "passed": { "type": "boolean" },
+      "summary": { "type": "string" },
+      "warnings": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "artifacts": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "next_steps": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "decisions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "path": { "type": "string" },
+            "decision": { "type": "string", "enum": ["keep", "rewrite", "drop"] },
+            "reason": { "type": "string" },
+            "target": { "type": "string" },
+            "rewrite_notes": { "type": "string" }
+          },
+          "required": ["path", "decision", "reason", "target", "rewrite_notes"]
+        }
+      },
+      "draft_path": { "type": "string" },
+      "generated_files": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "promoted_path": {
+        "type": ["string", "null"]
+      },
+      "backup_path": {
+        "type": ["string", "null"]
+      }
+    },
+    "required": [
+      "passed",
+      "summary",
+      "warnings",
+      "artifacts",
+      "next_steps",
+      "decisions",
+      "draft_path",
+      "generated_files",
+      "promoted_path",
+      "backup_path"
+    ]
+  }
+}

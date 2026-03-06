@@ -1,0 +1,18 @@
+id: ocudu-smoke-test
+name: OCUDU Smoke Test
+description: Run local post-build sanity checks for OCUDU and srsRAN artifacts on a Linux workstation
+category: testing
+tags:
+  - ocudu
+  - srsran
+  - open-ran
+  - linux
+  - smoke-test
+  - validation
+difficulty: intermediate
+repo: https://github.com/zhouyou-gu/skillful-ran
+install:
+  pip: jsonschema
+agent:
+  protocol: mcp
+  tool_schema: tool.json

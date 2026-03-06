@@ -1,0 +1,8 @@
+{"name":"plan dry run","prompt":"Plan the OCUDU build in .local/ocudu and show me the commands before making changes.","should_trigger":true,"must_include":["dry_run","commands"]}
+{"name":"build explicit tag","prompt":"Clone srsRAN Project at a specific tag and build it in the local OCUDU workspace.","should_trigger":true,"must_include":["source_ref","workspace"]}
+{"name":"bootstrap deps","prompt":"Prepare the documented Ubuntu dependencies and then build the project under .local/ocudu.","should_trigger":true,"must_include":["bootstrap_deps","commands"]}
+{"name":"zeromq build","prompt":"Configure the build for a local ZeroMQ-friendly workflow and keep the plan reproducible.","should_trigger":true,"must_include":["enable_zeromq","build_dir"]}
+{"name":"not host audit","prompt":"Check whether this workstation is missing FFTW or SCTP development packages.","should_trigger":false,"notes":"Route to ocudu-host-audit first."}
+{"name":"not smoke validation","prompt":"Run post-build smoke checks and verify that gnb --help works.","should_trigger":false,"notes":"Route to ocudu-smoke-test."}
+{"name":"not packaging","prompt":"Review these scratch notes and promote them into a tracked skill.","should_trigger":false,"notes":"Route to skillful-ran-packaging."}
+{"name":"not production claim","prompt":"Turn this build plan into a production deployment guide for carrier-grade RU interoperability.","should_trigger":false,"notes":"Out of scope for this skill."}

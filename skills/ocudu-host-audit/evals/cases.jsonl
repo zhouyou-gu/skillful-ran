@@ -1,0 +1,8 @@
+{"name":"audit basic host","prompt":"Check whether this Ubuntu 24.04 workstation is ready for OCUDU build work before I clone anything.","should_trigger":true,"must_include":["workspace","missing","checks"]}
+{"name":"audit portable linux","prompt":"Give me a non-destructive Linux readiness report for srsRAN prerequisites on a portable host.","should_trigger":true,"must_include":["passed","summary"]}
+{"name":"audit with network view","prompt":"Inspect this gaming PC for OCUDU prerequisites and include interface visibility in the report.","should_trigger":true,"must_include":["hardware","interfaces"]}
+{"name":"host audit strict","prompt":"Run a strict host audit for OCUDU and fail if recommended Ubuntu packages are missing.","should_trigger":true,"must_include":["strict","missing"]}
+{"name":"not build install","prompt":"Clone srsRAN Project and build it in .local/ocudu right now.","should_trigger":false,"notes":"Route to ocudu-build-install instead."}
+{"name":"not smoke test","prompt":"Run local smoke tests against the build directory and check gnb --help.","should_trigger":false,"notes":"Route to ocudu-smoke-test instead."}
+{"name":"not packaging","prompt":"Review these scratch files and promote the reusable ones into a tracked skill.","should_trigger":false,"notes":"Route to skillful-ran-packaging instead."}
+{"name":"not rf claim","prompt":"Validate RU interoperability and prove carrier-grade conformance on this host alone.","should_trigger":false,"notes":"Out of scope for the host audit skill."}

@@ -1,0 +1,18 @@
+id: skillful-ran-packaging
+name: Skillful RAN Packaging
+description: Review scratch OCUDU artifacts and scaffold compact tracked skills with keep rewrite drop decisions
+category: devtools
+tags:
+  - ocudu
+  - srsran
+  - packaging
+  - automation
+  - skills
+  - governance
+difficulty: intermediate
+repo: https://github.com/zhouyou-gu/skillful-ran
+install:
+  pip: pyyaml
+agent:
+  protocol: mcp
+  tool_schema: tool.json

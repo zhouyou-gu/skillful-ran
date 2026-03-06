@@ -1,0 +1,76 @@
+{
+  "name": "ocudu_smoke_test",
+  "title": "OCUDU Smoke Test",
+  "description": "Run local post-build sanity checks against a build directory or install prefix without overstating the result.",
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "default": ".local/ocudu"
+      },
+      "build_dir": {
+        "type": "string",
+        "default": ".local/ocudu/build/srsran-project"
+      },
+      "mode": {
+        "type": "string",
+        "enum": ["local-build", "install-check", "zeromq-readiness"],
+        "default": "local-build"
+      },
+      "install_prefix": {
+        "type": "string",
+        "default": "/usr/local"
+      },
+      "run_ctest": {
+        "type": "boolean",
+        "default": true
+      },
+      "dry_run": {
+        "type": "boolean",
+        "default": false
+      }
+    },
+    "required": ["workspace"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "passed": { "type": "boolean" },
+      "summary": { "type": "string" },
+      "warnings": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "artifacts": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "next_steps": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "checks": {
+        "type": "array",
+        "items": { "type": "object" }
+      },
+      "metrics": { "type": "object" },
+      "logs": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "required": [
+      "passed",
+      "summary",
+      "warnings",
+      "artifacts",
+      "next_steps",
+      "checks",
+      "metrics",
+      "logs"
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+id: ocudu-build-install
+name: OCUDU Build Install
+description: Plan or execute the documented OCUDU and srsRAN clone and build flow in the local lab workspace
+category: automation
+tags:
+  - ocudu
+  - srsran
+  - open-ran
+  - linux
+  - build
+  - install
+difficulty: intermediate
+repo: https://github.com/zhouyou-gu/skillful-ran
+install:
+  pip: requests
+agent:
+  protocol: mcp
+  tool_schema: tool.json

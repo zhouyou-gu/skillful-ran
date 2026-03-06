@@ -489,7 +489,7 @@ function resolveSkillFolderUrl(skill) {
 function updateSummary(totalCount, visibleCount, hasQuery) {
   const queryLabel = normalize(state.query);
 
-  let summary = `Showing ${visibleCount} of ${totalCount} ${totalCount === 1 ? 'skill' : 'skills'}`;
+  let summary = `Showing ${visibleCount} of ${totalCount} ${totalCount === 1 ? 'skill pack' : 'skill packs'}`;
   if (queryLabel) {
     summary += ` matching \"${state.query.trim()}\"`;
   }
@@ -517,17 +517,17 @@ function updateEmptyState(hasQuery) {
 
   if (hasQuery || state.category !== "all") {
     if (emptyTitle) {
-      emptyTitle.textContent = "No matching skills found";
+      emptyTitle.textContent = "No matching skill packs found";
     }
     if (emptyHint) {
       emptyHint.textContent = "Try adjusting your search or filters";
     }
   } else {
     if (emptyTitle) {
-      emptyTitle.textContent = "No skills available yet";
+      emptyTitle.textContent = "No skill packs available yet";
     }
     if (emptyHint) {
-      emptyHint.textContent = "Be the first to add a skill";
+      emptyHint.textContent = "Be the first to add a skill pack";
     }
   }
 }
@@ -594,7 +594,7 @@ function updateHeroStats() {
   });
 
   const parts = [];
-  parts.push(`${skills.length} ${skills.length === 1 ? 'skill' : 'skills'}`);
+  parts.push(`${skills.length} ${skills.length === 1 ? 'skill pack' : 'skill packs'}`);
   if (categories.size > 0) {
     parts.push(`${categories.size} ${categories.size === 1 ? 'category' : 'categories'}`);
   }
@@ -823,7 +823,7 @@ async function loadData() {
   ]);
 
   if (!configResp.ok || !registryResp.ok || !searchResp.ok) {
-    throw new Error("Failed to load marketplace assets. Check GitHub Pages paths and generated registry files.");
+    throw new Error("Failed to load Skillful RAN assets. Check GitHub Pages paths and generated registry files.");
   }
 
   const [config, registry, search] = await Promise.all([
@@ -855,6 +855,7 @@ async function bootstrap() {
 
     await loadData();
 
+    document.title = state.config.title;
     elements.title.textContent = state.config.title;
     elements.description.textContent = state.config.description;
 

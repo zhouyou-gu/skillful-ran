@@ -9,10 +9,10 @@
   --card-hover: #ffffff;
   --line: rgba(27, 31, 36, 0.10);
   --line-strong: rgba(27, 31, 36, 0.18);
-  --accent: #0969da;
-  --accent-hover: #0550ae;
-  --accent-light: rgba(9, 105, 218, 0.08);
-  --accent-gradient: linear-gradient(135deg, #0969da 0%, #54aeff 100%);
+  --accent: #0f766e;
+  --accent-hover: #115e59;
+  --accent-light: rgba(15, 118, 110, 0.10);
+  --accent-gradient: linear-gradient(135deg, #0f172a 0%, #0f766e 55%, #22d3ee 100%);
   --chip-bg: #f5f7f9;
   --chip-hover: #ebeef2;
   --danger: #cf222e;
@@ -207,15 +207,15 @@ h1 {
 }
 
 .btn-secondary.is-live {
-  border-color: rgba(9, 105, 218, 0.45);
-  background: linear-gradient(180deg, rgba(9, 105, 218, 0.12) 0%, rgba(9, 105, 218, 0.04) 100%);
-  box-shadow: 0 0 0 1px rgba(9, 105, 218, 0.2), var(--shadow-sm);
+  border-color: rgba(15, 118, 110, 0.45);
+  background: linear-gradient(180deg, rgba(15, 118, 110, 0.12) 0%, rgba(15, 118, 110, 0.04) 100%);
+  box-shadow: 0 0 0 1px rgba(15, 118, 110, 0.2), var(--shadow-sm);
 }
 
 .btn-secondary.is-live:hover {
-  border-color: rgba(9, 105, 218, 0.65);
-  background: linear-gradient(180deg, rgba(9, 105, 218, 0.18) 0%, rgba(9, 105, 218, 0.06) 100%);
-  box-shadow: 0 0 0 1px rgba(9, 105, 218, 0.3), var(--shadow-md);
+  border-color: rgba(15, 118, 110, 0.65);
+  background: linear-gradient(180deg, rgba(15, 118, 110, 0.18) 0%, rgba(15, 118, 110, 0.06) 100%);
+  box-shadow: 0 0 0 1px rgba(15, 118, 110, 0.3), var(--shadow-md);
 }
 
 .btn-ghost-link {
