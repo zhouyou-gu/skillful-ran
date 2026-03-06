@@ -1,20 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="title">
   <title>Skillful RAN icon</title>
   <defs>
-    <linearGradient id="skillful-ran-brand" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0f172a"/>
-      <stop offset="0.6" stop-color="#0f766e"/>
-      <stop offset="1" stop-color="#22d3ee"/>
+    <linearGradient id="bg" x1="0.94" y1="0.88" x2="0.08" y2="0.08">
+      <stop offset="0" stop-color="#fffdf7"/>
+      <stop offset="0.5" stop-color="#edf8e2"/>
+      <stop offset="1" stop-color="#95e1d3"/>
     </linearGradient>
+    <linearGradient id="wand-body" x1="0.15" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4f6368"/>
+      <stop offset="0.55" stop-color="#5a9cb8"/>
+      <stop offset="1" stop-color="#95e1d3"/>
+    </linearGradient>
+    <linearGradient id="star-fill" x1="0.1" y1="0" x2="0.95" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.28" stop-color="#fff6d3"/>
+      <stop offset="0.62" stop-color="#fce38a"/>
+      <stop offset="1" stop-color="#f38181"/>
+    </linearGradient>
+    <linearGradient id="signal-stroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fce38a"/>
+      <stop offset="0.58" stop-color="#f5c397"/>
+      <stop offset="1" stop-color="#ef9a8d"/>
+    </linearGradient>
+    <linearGradient id="signal-highlight" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.4" stop-color="#fff6d3"/>
+      <stop offset="0.75" stop-color="#ffe6c8"/>
+      <stop offset="1" stop-color="#ffdaba"/>
+    </linearGradient>
+    <filter id="soft-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.4"/>
+    </filter>
   </defs>
-  <rect width="128" height="128" rx="28" fill="url(#skillful-ran-brand)"/>
-  <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M30 40h48" stroke-width="12"/>
-    <path d="M30 64h60" stroke-width="12"/>
-    <path d="M30 88h40" stroke-width="12"/>
-    <path d="M90 40v24" stroke-width="8" opacity="0.9"/>
-    <path d="M90 64h14" stroke-width="8" opacity="0.9"/>
+
+  <rect x="0" y="0" width="128" height="128" rx="24" fill="url(#bg)"/>
+  <g>
+    <g fill="none" stroke-linecap="round">
+      <g stroke="#f5c397" opacity="0.14" filter="url(#soft-glow)">
+        <path d="M64 22A42 42 0 0 1 106 64" stroke-width="10"/>
+        <path d="M64 33A31 31 0 0 1 95 64" stroke-width="10"/>
+        <path d="M64 44A20 20 0 0 1 84 64" stroke-width="10"/>
+      </g>
+      <g stroke="url(#signal-stroke)">
+        <path d="M64 22A42 42 0 0 1 106 64" stroke-width="6.8"/>
+        <path d="M64 33A31 31 0 0 1 95 64" stroke-width="6.8"/>
+        <path d="M64 44A20 20 0 0 1 84 64" stroke-width="6.8"/>
+      </g>
+      <g stroke="url(#signal-highlight)" opacity="0.88">
+        <path d="M64 22A42 42 0 0 1 106 64" stroke-width="2.1"/>
+        <path d="M64 33A31 31 0 0 1 95 64" stroke-width="2.1"/>
+        <path d="M64 44A20 20 0 0 1 84 64" stroke-width="2.1"/>
+      </g>
+    </g>
+
+    <g opacity="0.12" filter="url(#soft-glow)">
+      <line x1="30" y1="98" x2="64" y2="64" stroke="#5a9cb8" stroke-width="14.2" stroke-linecap="round"/>
+    </g>
+    <line x1="30" y1="98" x2="64" y2="64" stroke="url(#wand-body)" stroke-width="11.8" stroke-linecap="round"/>
+
+    <path d="M64 51.8L67.4 58.6L75.5 59.3L69.4 64.6L71.3 72.5L64 68L56.7 72.5L58.6 64.6L52.5 59.3L60.6 58.6Z" fill="#ffffff" opacity="0.34" transform="rotate(45 64 64)"/>
+    <path d="M64 49.8L67.4 56.6L75.5 57.3L69.4 62.6L71.3 70.5L64 66L56.7 70.5L58.6 62.6L52.5 57.3L60.6 56.6Z" fill="url(#star-fill)" stroke="#bf6668" stroke-width="2.1" stroke-linejoin="round" transform="rotate(45 64 64)"/>
   </g>
-  <circle cx="108" cy="64" r="10" fill="#ffffff"/>
 </svg>
