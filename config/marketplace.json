@@ -1,0 +1,14 @@
+{
+  "title": "Skill Marketplace Template",
+  "description": "Reusable agent skills",
+  "author": "Zhouyou Gu",
+  "license": "MIT",
+  "url": "https://<user>.github.io/<repo>",
+  "theme": "dark",
+  "categories": [
+    "data",
+    "automation",
+    "ai",
+    "devtools"
+  ]
+}
