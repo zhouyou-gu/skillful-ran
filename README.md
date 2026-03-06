@@ -1,6 +1,6 @@
 # Skillful RAN
 
-Skillful RAN is a public OCUDU-first skill marketplace for building, testing, and packaging reusable open RAN workflows on Linux.
+Skillful RAN is a public OCUDU-first skill marketplace for building, validating, and packaging reusable AI-RAN and O-RAN workflows on Linux testbeds.
 
 This repo is both:
 

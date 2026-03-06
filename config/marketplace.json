@@ -1,6 +1,6 @@
 {
   "title": "Skillful RAN",
-  "description": "Practical, junior-friendly skill packs for building, testing, and understanding OCUDU and the open RAN stack.",
+  "description": "Execution-ready skill packs for validating OCUDU, O-RAN, and AI-RAN workflows on Linux testbeds.",
   "author": "Zhouyou Gu",
   "license": "MIT",
   "url": "https://zhouyou-gu.github.io/skillful-ran",
